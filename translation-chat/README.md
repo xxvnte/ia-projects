@@ -27,4 +27,7 @@ translation-chat/
 
 The application will be available in: http://localhost:3000
 
+# How it works
+
+<img width="758" height="918" alt="translationchat" src="https://github.com/user-attachments/assets/732e4ab2-7a92-483d-860d-849f7223757c" />
 
