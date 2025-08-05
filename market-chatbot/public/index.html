@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/img/icon.png" type="image/png" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/main.js" defer></script>
+    <title>Market Chatbot "El Pepe"</title>
+  </head>
+  <body>
+    <header class="chat__header">
+      <img class="header__icon" src="./assets/img/icon.png" />
+      <h1 class="header__title">Market Chatbot "El Pepe"</h1>
+    </header>
+
+    <section class="chat">
+      <div id="messages" class="chat__messages">
+        <!--
+        <div class="chat__message chat__message--user">user message</div>
+        <div class="chat__message chat__message--bot">bot message</div>
+      --></div>
+
+      <div class="chat__input-group">
+        <input
+          type="text"
+          id="inputText"
+          class="chat__input"
+          placeholder="How can I help you?"
+        />
+
+        <button id="sendButton" class="chat__button">Send</button>
+      </div>
+    </section>
+  </body>
+</html>
