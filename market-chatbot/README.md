@@ -30,4 +30,5 @@ The application will be available in: http://localhost:3000
 
 # How it works
 
-<img width="807" height="783" alt="image" src="https://github.com/user-attachments/assets/10076f46-cb17-4367-8afb-ebc2aa545ad8" />
+<img width="757" height="818" alt="image" src="https://github.com/user-attachments/assets/ca2dc7bf-30f2-4a0d-93ca-dbabef64f285" />
+
