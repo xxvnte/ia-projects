@@ -17,8 +17,10 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+let conversation = {};
+
 app.post("/api/chatbot", async (req, res) => {
-  const { message } = req.body;
+  const { userId, message } = req.body;
 
   const promptUser = message;
   const context = `You are support assistant for the supermarket "El Pepe".
@@ -30,19 +32,31 @@ app.post("/api/chatbot", async (req, res) => {
   `;
   const promptSystem = `You must answer as briefly and directly as possible, using as few tokens as possible.`;
 
+  if (!conversation[userId]) {
+    conversation[userId] = [];
+  }
+
+  conversation[userId].push({ role: "user", content: promptUser });
+
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: context },
         { role: "system", content: promptSystem },
-        { role: "user", content: promptUser },
+        ...conversation[userId],
       ],
       max_tokens: 200,
       response_format: { type: "text" },
     });
 
     const botResponse = response.choices[0].message.content;
+
+    conversation[userId].push({ role: "assistant", content: botResponse });
+
+    if (conversation[userId] > 12) {
+      conversation[userId] = conversation[userId].slice(-10);
+    }
 
     res.status(200).json({
       botResponse,

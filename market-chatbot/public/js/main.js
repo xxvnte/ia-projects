@@ -2,6 +2,8 @@ const sendButton = document.querySelector("#sendButton");
 const inputText = document.querySelector("#inputText");
 const messagesContainer = document.querySelector("#messages");
 
+const userId = Date.now() + Math.floor(777 + Math.random() * 7000);
+
 const sendMessage = async () => {
   const message = inputText.value.trim();
 
@@ -17,7 +19,7 @@ const sendMessage = async () => {
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ userId, message }),
     });
     const data = await response.json();
 
