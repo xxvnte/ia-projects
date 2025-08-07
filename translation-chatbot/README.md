@@ -1,4 +1,4 @@
-# Translation Chat
+# Translation Chatbot
 
 This project is developed using the OpenAI API to create a translation chat application.
 
