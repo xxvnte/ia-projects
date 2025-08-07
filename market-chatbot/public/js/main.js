@@ -12,7 +12,13 @@ const sendMessage = async () => {
   messagesContainer.innerHTML += `<div class="chat__message chat__message--user">${message}</div>`;
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
+  setTimeout(() => {
+    messagesContainer.innerHTML += `<div class="chat__message chat__message--bot chat__message--typing"><div class="loader"></div></div>`;
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }, 500);
+
   inputText.value = "";
+
   try {
     const response = await fetch("/api/chatbot", {
       method: "POST",
@@ -22,6 +28,8 @@ const sendMessage = async () => {
       body: JSON.stringify({ userId, message }),
     });
     const data = await response.json();
+
+    document.querySelector(".chat__message--typing").remove();
 
     messagesContainer.innerHTML += `<div class="chat__message chat__message--bot">${data.botResponse}</div>`;
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
