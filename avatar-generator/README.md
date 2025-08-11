@@ -30,6 +30,6 @@ The application will be available in: http://localhost:3000
 
 # How it works
 
-<img src="https://github.com/user-attachments/assets/6a550a7b-45c2-4dde-93b6-be77cd6eb31b" width="1000" height="1000">
+![avatargif](https://github.com/user-attachments/assets/75b99ff1-eb2d-483d-9c44-df775bd27a98)
 
 
