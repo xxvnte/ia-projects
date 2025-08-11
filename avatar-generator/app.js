@@ -17,62 +17,39 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-let userThreads = {};
+app.post("/api/gen-img", async (req, res) => {
+  const { avatar } = req.body;
 
-app.post("/api/chatbot", async (req, res) => {
-  const { userId, message } = req.body;
+  const context = `You are expert grafic designer.
+  Your final objetive is create a avatar for a ${avatar}.
+  Avatar specs: 
+  - Style: Cartoon (type animated drawings)
+  - Dimensions: 256x256 pixels
+  - Image background: Solid color
+  - Avatar protagonist: ${avatar}
 
-  const promptUser = message;
+  For to do good the job, you should achieve whit all specs.
+  If you do it right, you will receive $700.
+  `;
 
   try {
-    if (!userThreads[userId]) {
-      const thread = await openai.beta.threads.create();
-      userThreads[userId] = thread.id;
-    }
-
-    const threadId = userThreads[userId];
-
-    await openai.beta.threads.messages.create(threadId, {
-      role: "user",
-      content: promptUser,
+    const response = await openai.images.generate({
+      model: "dall-e-2",
+      prompt: context,
+      n: 1,
+      size: "256x256",
     });
 
-    const myAssistant = await openai.beta.threads.runs.create(threadId, {
-      assistant_id: process.env.ASSISTANT_ID,
-    });
-
-    let run = myAssistant;
-    let attemps = 0;
-
-    while (run.status !== "completed" && attemps < 30) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      run = await openai.beta.threads.runs.retrieve(threadId, myAssistant.id);
-
-      attemps++;
-    }
-
-    if (run.status !== "completed") {
-      throw new Error(
-        `Execution from assistant incompleted, status: ${run.status}`
-      );
-    }
-
-    const threadMessages = await openai.beta.threads.messages.list(threadId);
-
-    const botResponses = threadMessages.data.filter(
-      (msg) => msg.role === "assistant"
-    );
-
-    const botResponse = botResponses.sort(
-      (a, b) => b.created_at - a.created_at
-    )[0].content[0].text.value;
+    const imageUrl = response.data[0].url;
 
     res.status(200).json({
-      botResponse,
+      imageUrl,
     });
   } catch (error) {
-    console.error("Error:", error);
+    console.log("Error:", error);
+    res.status(500).json({
+      error: "Error when generate avatar",
+    });
   }
 });
 

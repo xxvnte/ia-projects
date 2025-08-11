@@ -1,47 +1,29 @@
 const sendButton = document.querySelector("#sendButton");
-const inputText = document.querySelector("#inputText");
-const messagesContainer = document.querySelector("#messages");
+const selecButton = document.querySelector("#selectButton");
 
-const userId = Date.now() + Math.floor(777 + Math.random() * 7000);
+const generateAvatar = async () => {
+  const avatar = selecButton.value.trim();
 
-const sendMessage = async () => {
-  const message = inputText.value.trim();
+  if (!avatar) return false;
 
-  if (!message) return false;
+  const avatarBox = document.querySelector(".avatar-box");
 
-  messagesContainer.innerHTML += `<div class="chat__message chat__message--user">${message}</div>`;
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-  setTimeout(() => {
-    messagesContainer.innerHTML += `<div class="chat__message chat__message--bot chat__message--typing"><div class="loader"></div></div>`;
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }, 500);
-
-  inputText.value = "";
+  avatarBox.innerHTML = `<div class=loader></div>`;
 
   try {
-    const response = await fetch("/api/chatbot", {
+    const response = await fetch("/api/gen-img", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ userId, message }),
+      body: JSON.stringify({ avatar }),
     });
     const data = await response.json();
 
-    document.querySelector(".chat__message--typing").remove();
-
-    messagesContainer.innerHTML += `<div class="chat__message chat__message--bot">${data.botResponse}</div>`;
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    avatarBox.innerHTML = `<img src="${data.imageUrl}"/>`;
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
-sendButton.addEventListener("click", sendMessage);
-inputText.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    sendMessage();
-  }
-});
+sendButton.addEventListener("click", generateAvatar);
