@@ -30,6 +30,7 @@ The application will be available in: http://localhost:3000
 
 # How it works
 
-![avatargif](https://github.com/user-attachments/assets/75b99ff1-eb2d-483d-9c44-df775bd27a98)
+![avatargeneratorgif](https://github.com/user-attachments/assets/54180924-dcba-45f0-acfe-6227a27f9cc3)
+
 
 
