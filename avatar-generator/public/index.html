@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/img/icon.png" type="image/png" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/main.js" defer></script>
+    <title>Avatar Generator</title>
+  </head>
+  <body>
+    <header class="chat-header">
+      <img class="header-icon" src="./assets/img/icon.png" />
+      <h1 class="header-title">Avatar Generator</h1>
+    </header>
+
+    <section class="container">
+      <h1 class="sub-title">Your Avatar</h1>
+
+      <div class="avatar-box">
+        <p class="loader"></p>
+      </div>
+
+      <div class="buttons">
+        <select class="selectButton">
+          <option value="men">Men</option>
+          <option value="women">Woman</option>
+          <option value="animal">Animal</option>
+          <option value="object">Object</option>
+        </select>
+
+        <button id="sendButton" class="sendButton">Generate</button>
+      </div>
+    </section>
+  </body>
+</html>
