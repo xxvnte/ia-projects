@@ -10,6 +10,17 @@ market-chatbot/
 ├── app.js (backend)
 ```
 
+# Requirements
+
+You need your own OpenAI API key to run this project.  
+Create a `.env` file in the root directory and add your API key like this:
+
+```
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+Replace `your_openai_api_key_here` with your actual OpenAI API key.
+
 # Configuration and Execution
 
 1. Clone repository and navigate to the project directory:
@@ -23,7 +34,7 @@ market-chatbot/
 
 ```shell
    npm install
-   nodemon app.js
+   npm start
 ```
 
 The application will be available in: http://localhost:3000
